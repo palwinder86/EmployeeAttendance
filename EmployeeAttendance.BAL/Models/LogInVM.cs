@@ -30,7 +30,7 @@ namespace EmployeeAttendance.BAL.Models
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<bool> IsDeleted { get; set; }*/
         public string Password { get; set; }
-   
+
         public Nullable<bool> IsAdmin { get; set; }
 
     }

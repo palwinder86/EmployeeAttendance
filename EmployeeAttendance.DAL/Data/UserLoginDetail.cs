@@ -20,5 +20,6 @@ namespace EmployeeAttendance.DAL.Data
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<bool> IsAdmin { get; set; }
+
     }
 }

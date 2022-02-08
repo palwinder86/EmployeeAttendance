@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace EmployeeAttendance.BAL.Models
 {
-    
     public class EmployeeVM
     {
         //EmployeeDetail
@@ -27,14 +26,14 @@ namespace EmployeeAttendance.BAL.Models
         // Department
         public int DeparmentId { get; set; }
         public string DepartmentName { get; set; }
-       /* public Nullable<bool> IsDeleted { get; set; }
-        public Nullable<System.DateTime> CreatedOn { get; set; }*/
+        /* public Nullable<bool> IsDeleted { get; set; }
+         public Nullable<System.DateTime> CreatedOn { get; set; }*/
 
         //Project
         public int ProjectId { get; set; }
         public string ProjectName { get; set; }
-     /*   public Nullable<bool> IsDeleted { get; set; }
-        public Nullable<System.DateTime> CreatedOn { get; set; }*/
+        /*   public Nullable<bool> IsDeleted { get; set; }
+           public Nullable<System.DateTime> CreatedOn { get; set; }*/
 
     }
 }

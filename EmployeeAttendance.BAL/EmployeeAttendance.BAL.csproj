@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CF1CA333-B6F1-40CB-BDF8-A268F0E5BA1C}</ProjectGuid>
+    <ProjectGuid>{50DB750D-4C4A-433E-8981-906564A783F0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EmployeeAttendance.BAL</RootNamespace>
@@ -44,9 +44,6 @@
     <Compile Include="Models\EmployeeVM.cs" />
     <Compile Include="Models\LogInVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="services\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EmployeeAttendance.DAL\EmployeeAttendance.DAL.csproj">
