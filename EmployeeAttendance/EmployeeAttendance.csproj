@@ -181,12 +181,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EmployeeAttendance.BAL\EmployeeAttendance.BAL.csproj">
-      <Project>{cf1ca333-b6f1-40cb-bdf8-a268f0e5ba1c}</Project>
+      <Project>{50db750d-4c4a-433e-8981-906564a783f0}</Project>
       <Name>EmployeeAttendance.BAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EmployeeAttendance.DAL\EmployeeAttendance.DAL.csproj">
-      <Project>{ef2cc142-a2e7-4b39-96d1-fb70ae46b959}</Project>
-      <Name>EmployeeAttendance.DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
