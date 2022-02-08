@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="67e072f139924554b417ee89bc59187c" Name="Diagram1">
+        <EntityTypeShape EntityType="DailyEmployeeAttendenceModel.AdminSignUp" Width="1.5" PointX="2.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DailyEmployeeAttendenceModel.Department" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DailyEmployeeAttendenceModel.EmployeeDetail" Width="1.5" PointX="4.875" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DailyEmployeeAttendenceModel.LoginPage" Width="1.5" PointX="3.375" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DailyEmployeeAttendenceModel.LoginTime" Width="1.5" PointX="6.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DailyEmployeeAttendenceModel.Project" Width="1.5" PointX="0.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DailyEmployeeAttendenceModel.UserLoginDetail" Width="1.5" PointX="6.75" PointY="4.125" IsExpanded="true" />
+        <AssociationConnector Association="DailyEmployeeAttendenceModel.FK__AdminSign__DepId__1FCDBCEB" ManuallyRouted="false" />
+        <AssociationConnector Association="DailyEmployeeAttendenceModel.FK__AdminSign__ProjI__20C1E124" ManuallyRouted="false" />
+        <AssociationConnector Association="DailyEmployeeAttendenceModel.FK__EmployeeD__DepId__1920BF5C" ManuallyRouted="false" />
+        <AssociationConnector Association="DailyEmployeeAttendenceModel.FK__EmployeeD__ProjI__1A14E395" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
