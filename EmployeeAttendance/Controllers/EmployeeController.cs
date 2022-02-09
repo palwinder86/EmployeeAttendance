@@ -33,5 +33,11 @@ namespace EmployeeAttendance.Controllers
             _service.CreateEmployeeData(employeeVM);
             return RedirectToAction("Index");
         }
+
+        public ActionResult TestMethod()
+        {
+            var a = 10;
+            return RedirectToAction("Index");
+        }
     }
 }
