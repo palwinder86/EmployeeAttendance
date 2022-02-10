@@ -58,7 +58,7 @@ namespace EmployeeAttendance.BAL.Services
                 employeeDetail.DateOfBirth = employeeVM.DateOfBirth;
                 employeeDetail.EmployeeAddress = employeeVM.EmployeeAddress;
                 employeeDetail.EmployeeSalary = employeeVM.EmployeeSalary;
-                //employeeDetail.EmployeeImage = employeeVM.EmployeeImage;
+                employeeDetail.EmployeeImage = employeeVM.EmployeeImage;
                 employeeDetail.IsDeleted = false;
                 employeeDetail.CreatedOn = DateTime.Now;
                 employeeDetail.DepId = employeeVM.DepId;
