@@ -29,9 +29,15 @@ namespace EmployeeAttendance.Controllers
         [HttpPost]
         public ActionResult Create(EmployeeVM employeeVM)
         {   
-            
             _service.CreateEmployeeData(employeeVM);
             return RedirectToAction("Index");
         }
+
+        public ActionResult Display(string Search) //for Searching
+        {
+            var data= _service.FindData(Search);
+            return View(data);
+        }
+      
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeAttendance.BAL.Services
 {
-   public class RegistrationService
+    public class RegistrationService
     {
         EmployeeAttendenceEntities _context;
         public RegistrationService()
@@ -49,7 +49,7 @@ namespace EmployeeAttendance.BAL.Services
         {
             bool result = false;
             EmployeeDetail employeeDetail = new EmployeeDetail();
-            if(employeeVM !=null)
+            if (employeeVM != null)
             {
                 employeeDetail.FirstName = employeeVM.FirstName;
                 employeeDetail.LastName = employeeVM.LastName;
@@ -58,18 +58,50 @@ namespace EmployeeAttendance.BAL.Services
                 employeeDetail.DateOfBirth = employeeVM.DateOfBirth;
                 employeeDetail.EmployeeAddress = employeeVM.EmployeeAddress;
                 employeeDetail.EmployeeSalary = employeeVM.EmployeeSalary;
-                employeeDetail.EmployeeImage = employeeVM.EmployeeImage;
+                //employeeDetail.EmployeeImage = employeeVM.EmployeeImage;
                 employeeDetail.IsDeleted = false;
                 employeeDetail.CreatedOn = DateTime.Now;
                 employeeDetail.DepId = employeeVM.DepId;
                 employeeDetail.ProjId = employeeVM.ProjId;
                 _context.EmployeeDetails.Add(employeeDetail);
+                _context.SaveChanges();
                 result = true;
 
             }
             return result;
+        } 
 
+        public List<EmployeeVM> FindData(string Search)
+        {
+           List<EmployeeVM >employee = new List<EmployeeVM>();
+            if(Search != null)
+            {
+               
+                var findData = _context.EmployeeDetails.Where(x => x.FirstName.Contains(Search)).ToList();
+                foreach (var list in findData)
+                {
+                    EmployeeVM employeeVM = new EmployeeVM();
+                    employeeVM.EmployeeId = list.EmployeeId;
+                    employeeVM.FirstName = list.FirstName;
+                    employeeVM.LastName = list.LastName;
+                    employeeVM.Email = list.Email;
+                    employeeVM.ContactNumber = list.ContactNumber;
+                    employeeVM.DateOfBirth = list.DateOfBirth;
+                    employeeVM.EmployeeAddress = list.EmployeeAddress;
+                    employeeVM.EmployeeSalary = list.EmployeeSalary;
+                    // employeeVMil.EmployeeImage = employeeVM.EmployeeImage;
+                    employeeVM.IsDeleted = false;
+                    employeeVM.CreatedOn = DateTime.Now;
+                    employeeVM.DepId = list.DepId;
+                    employeeVM.ProjId = list.ProjId;
+                    employeeVM.DepartmentName = list.Department.DepartmentName;
+                    employeeVM.ProjectName = list.Project.ProjectName;
+                    employee.Add(employeeVM);
+                }
+            }
+            return employee;
         }
+      
 
     }
 }

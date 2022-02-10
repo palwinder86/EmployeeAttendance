@@ -172,6 +172,8 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="Views\Employee\Create.cshtml" />
+    <Content Include="Views\Employee\Display.cshtml" />
+    <Content Include="Views\Employee\Mi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
