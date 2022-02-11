@@ -136,5 +136,11 @@ namespace EmployeeAttendance.Controllers
            bool data= _service.DeleteData(id);
             return RedirectToAction(nameof(Display));
         }
+
+        public ActionResult TestMethod()
+        {
+            var a = 10;
+            return RedirectToAction("Index");
+        }
     }
 }
