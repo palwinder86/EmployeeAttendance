@@ -13,6 +13,9 @@
 <table class="table">
     <tr>
         <th>
+            EmployeeId
+        </th>
+        <th>
             FirstName
         </th>
         <th>
@@ -22,16 +25,16 @@
             Email
         </th>
         <th>
-            ContactNumber
+            Contact
         </th>
         <th>
             DateOfBirth
         </th>
         <th>
-            EmployeeAddress
+            Address
         </th>
         <th>
-            EmployeeSalary
+            Salary
         </th>
         @*<th>
             DepId
@@ -51,6 +54,9 @@
     @foreach (var item in Model) 
     {
 <tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.EmployeeId)
+    </td>
     <td>
         @Html.DisplayFor(modelItem => item.FirstName)
     </td>
