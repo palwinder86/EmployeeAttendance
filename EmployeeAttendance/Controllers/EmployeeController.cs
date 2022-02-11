@@ -142,5 +142,12 @@ namespace EmployeeAttendance.Controllers
             var a = 10;
             return RedirectToAction("Index");
         }
+
+        public ActionResult Details(int? id)
+        {
+            var EmpoyeeDetail = _service.Detail(id);
+            return View(EmpoyeeDetail);
+        }
+      
     }
 }

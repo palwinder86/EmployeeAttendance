@@ -45,6 +45,7 @@ namespace EmployeeAttendance.BAL.Services
                 .ToList();
             return result;
         }
+        
         public bool CreateEmployeeData(EmployeeVM employeeVM)
         {
             bool result = false;
@@ -80,14 +81,13 @@ namespace EmployeeAttendance.BAL.Services
                 result = true;
             }
             return result;
-        } 
+        }
 
         public List<EmployeeVM> FindData(string Search)
         {
-           List<EmployeeVM >employee = new List<EmployeeVM>();
-            if(Search != null)
+            List<EmployeeVM> employee = new List<EmployeeVM>();
+            if (Search != null)
             {
-               
                 var findData = _context.EmployeeDetails.Where(x => x.FirstName.Contains(Search)).ToList();
                 foreach (var list in findData)
                 {
@@ -172,5 +172,33 @@ namespace EmployeeAttendance.BAL.Services
         }
 
 
+
+        public EmployeeVM Detail(int? id)
+        {
+            EmployeeVM employeeVM = new EmployeeVM();
+            if (id != 0)
+            {
+                var data = _context.EmployeeDetails.FirstOrDefault(x => x.EmployeeId == id && x.IsDeleted == false);
+                employeeVM.EmployeeId = data.EmployeeId;
+                employeeVM.FirstName = data.FirstName;
+                employeeVM.LastName = data.LastName;
+                employeeVM.Email = data.Email;
+                employeeVM.ContactNumber = data.ContactNumber;
+                employeeVM.DateOfBirth = data.DateOfBirth;
+                employeeVM.EmployeeAddress = data.EmployeeAddress;
+                employeeVM.EmployeeSalary = data.EmployeeSalary;
+                // employeeVM.EmployeeImage = employeeVM.EmployeeImage;
+                employeeVM.IsDeleted = false;
+                employeeVM.CreatedOn = DateTime.Now;
+                employeeVM.DepId = data.DepId;
+                employeeVM.ProjId = data.ProjId;
+                employeeVM.DepartmentName = data.Department.DepartmentName;
+                employeeVM.ProjectName = data.Project.ProjectName;
+            }
+            return employeeVM;  
+        }
     }
 }
+
+
+

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmployeeAttendance.DAL.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -41,6 +42,7 @@ namespace EmployeeAttendance.BAL.Models
         public string ProjectName { get; set; }
         /*   public Nullable<bool> IsDeleted { get; set; }
            public Nullable<System.DateTime> CreatedOn { get; set; }*/
-
+        public virtual Department Department { get; set; }
+        public virtual Project Project { get; set; }
     }
 }

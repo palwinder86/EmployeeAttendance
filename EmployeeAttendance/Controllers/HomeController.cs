@@ -24,7 +24,7 @@ namespace EmployeeAttendance.Controllers
         {
             return View();
         }
-
+          
         [HttpPost]
         public ActionResult Login(AdminLogInVM adminLogInVM)
         {
