@@ -89,7 +89,6 @@ namespace EmployeeAttendance.Controllers
             return View(data);
         }
 
-
         [HttpPost]
         public ActionResult Edit(HttpPostedFileBase file, EmployeeVM emp)
         {
@@ -108,7 +107,6 @@ namespace EmployeeAttendance.Controllers
                     emp.EmployeeImage = "~/images/" + _filename;
                     if (extenion.ToLower() == ".jpg" || extenion.ToLower() == ".jpeg" || extenion.ToLower() == ".png")
                     {
-
                         if (file.ContentLength <= 1000000)
                         {
                             ViewBag.DepartmentList = _service.GetDepartmentList();
@@ -126,13 +124,9 @@ namespace EmployeeAttendance.Controllers
                             _context.Entry(employee).State = EntityState.Modified;
 
                              return RedirectToAction(nameof(Display));
-
                         }
-
                     }
                 }
-
-
             }
             return View();
 
