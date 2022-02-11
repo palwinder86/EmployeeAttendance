@@ -3,15 +3,29 @@
     ViewBag.Title = "Index";
 }
 
-<div class="form-group col">
-    <div class="col-md-2">
-        <h2>
-            @Html.ActionLink("Create New", "Create")
-        </h2>
-    </div>
-    <div class="col-md-10">
-        <h2>
-            @Html.ActionLink("Search Employee", "Display")
-        </h2>
+<br />
+
+<div class="form-group">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <img class="card-img-top" src="~/Images/graphic-design-3514101_1920.jpg" alt="Card image cap" height="200" width="300">
+                <div class="card-body">
+                    <br />
+                    @Html.ActionLink("Create New", "Create", new { @style = "btn btn-primary" })
+@*                    <a href="#" class="btn btn-primary">Go somewhere</a>
+*@                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <img class="card-img-top" src="~/Images/graphic-design-3514101_1920.jpg" alt="Card image cap" height="200" width="300">
+                <div class="card-body">
+                    <br />
+                    @Html.ActionLink("Search Employee", "Display", new { @style = "btn btn-primary" })
+@*                    <a href="#" class="btn btn-primary">Go somewhere</a>
+*@                </div>
+            </div>
+        </div>
     </div>
 </div>

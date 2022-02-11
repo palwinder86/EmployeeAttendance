@@ -38,6 +38,12 @@ namespace EmployeeAttendance.Controllers
             var data= _service.FindData(Search);
             return View(data);
         }
+
+        public ActionResult Details(int? id)
+        {
+            var EmpoyeeDetail = _service.Detail(id);
+            return View(EmpoyeeDetail);
+        }
       
     }
 }
