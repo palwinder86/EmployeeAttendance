@@ -10,10 +10,10 @@ namespace EmployeeAttendance.BAL.Services
 {
     public class RegistrationService
     {
-        EmployeeAttendenceEntities _context;
+        EmployeeDetailsDBEntities _context;
         public RegistrationService()
         {
-            _context = new EmployeeAttendenceEntities();
+            _context = new EmployeeDetailsDBEntities();
         }
         public bool AdminLogin(AdminLogInVM adminLogInVM)
         {
@@ -29,19 +29,19 @@ namespace EmployeeAttendance.BAL.Services
             }
             //return result;
         }
-        public List<KeyValueModel<int, string>> GetDepartmentList()
+        public List<KeyValueModel<Guid, string>> GetDepartmentList()
         {
-            List<KeyValueModel<int, string>> result = new List<KeyValueModel<int, string>>();
+            List<KeyValueModel<Guid, string>> result = new List<KeyValueModel<Guid, string>>();
             result = _context.Departments.Where(x => x.IsDeleted == false)
-                .Select(x => new KeyValueModel<int, string> { Key = x.DeparmentId, Value = x.DepartmentName })
+                .Select(x => new KeyValueModel<Guid, string> { Key = x.DepartmentId, Value = x.DepartmentName })
                 .ToList();
             return result;
         }
-        public List<KeyValueModel<int, string>> GetProjectList()
+        public List<KeyValueModel<Guid, string>> GetProjectList()
         {
-            List<KeyValueModel<int, string>> result = new List<KeyValueModel<int, string>>();
+            List<KeyValueModel<Guid, string>> result = new List<KeyValueModel<Guid, string>>();
             result = _context.Projects.Where(x => x.IsDeleted == false)
-                .Select(x => new KeyValueModel<int, string> { Key = x.ProjectId, Value = x.ProjectName })
+                .Select(x => new KeyValueModel<Guid, string> { Key = x.ProjectId, Value = x.ProjectName })
                 .ToList();
             return result;
         }
@@ -52,7 +52,7 @@ namespace EmployeeAttendance.BAL.Services
             EmployeeDetail employeeDetail = new EmployeeDetail();
             if (employeeVM != null)
             {
-                employeeDetail.EmployeeId = new int();
+                employeeDetail.EmployeeId = new Guid();
                 employeeDetail.FirstName = employeeVM.FirstName;
                 employeeDetail.LastName = employeeVM.LastName;
                 employeeDetail.Email = employeeVM.Email;
@@ -112,7 +112,7 @@ namespace EmployeeAttendance.BAL.Services
             }
             return employee;
         }
-        public EmployeeVM EditEmployeeData(int? ID)
+        public EmployeeVM EditEmployeeData(Guid? ID)
         {
             EmployeeVM employee = new EmployeeVM();
             if(ID !=null)
@@ -159,7 +159,7 @@ namespace EmployeeAttendance.BAL.Services
             }
             return result;
         }
-        public bool DeleteData(int id)
+        public bool DeleteData(Guid id)
         {
             bool result = true;
            EmployeeDetail employeeDetail= _context.EmployeeDetails.Where(x => x.EmployeeId == id).FirstOrDefault();
@@ -173,10 +173,10 @@ namespace EmployeeAttendance.BAL.Services
 
 
 
-        public EmployeeVM Detail(int? id)
+        public EmployeeVM Detail(Guid? id)
         {
             EmployeeVM employeeVM = new EmployeeVM();
-            if (id != 0)
+            if (id != null)
             {
                 var data = _context.EmployeeDetails.FirstOrDefault(x => x.EmployeeId == id && x.IsDeleted == false);
                 employeeVM.EmployeeId = data.EmployeeId;

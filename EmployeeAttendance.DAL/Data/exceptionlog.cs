@@ -12,13 +12,16 @@ namespace EmployeeAttendance.DAL.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class LoginTime
+    public partial class exceptionlog
     {
-        public System.Guid LoginTimeId { get; set; }
-        public Nullable<System.TimeSpan> TimeIn { get; set; }
-        public Nullable<System.TimeSpan> TimeOut { get; set; }
-        public Nullable<System.TimeSpan> TotalTime { get; set; }
-        public Nullable<bool> IsDeleted { get; set; }
-        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public System.Guid id { get; set; }
+        public string errormessage { get; set; }
+        public string source { get; set; }
+        public string stacktrace { get; set; }
+        public string target { get; set; }
+        public string innerexceptionmessage { get; set; }
+        public Nullable<System.Guid> userid { get; set; }
+        public string message { get; set; }
+        public DateTime createdon { get; set; }
     }
 }

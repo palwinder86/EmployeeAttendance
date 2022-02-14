@@ -4,12 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DailyEmployeeAttendenceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EmployeeDetailsDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AdminSignUp">
           <Key>
             <PropertyRef Name="AdminId" />
           </Key>
-          <Property Name="AdminId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdminId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="AdminName" Type="varchar" MaxLength="50" />
           <Property Name="Address" Type="varchar" MaxLength="50" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
@@ -19,14 +19,14 @@
           <Property Name="IsAdmin" Type="bit" />
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="CreatedOn" Type="datetime" />
-          <Property Name="DepId" Type="int" />
-          <Property Name="ProjId" Type="int" />
+          <Property Name="DepId" Type="uniqueidentifier" />
+          <Property Name="ProjId" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
-            <PropertyRef Name="DeparmentId" />
+            <PropertyRef Name="DepartmentId" />
           </Key>
-          <Property Name="DeparmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="DepartmentName" Type="varchar" MaxLength="50" />
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="CreatedOn" Type="datetime" />
@@ -35,7 +35,7 @@
           <Key>
             <PropertyRef Name="EmployeeId" />
           </Key>
-          <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="FirstName" Type="varchar" MaxLength="50" />
           <Property Name="LastName" Type="varchar" MaxLength="50" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
@@ -46,14 +46,28 @@
           <Property Name="EmployeeImage" Type="nvarchar" MaxLength="2000" />
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="CreatedOn" Type="datetime" />
-          <Property Name="DepId" Type="int" />
-          <Property Name="ProjId" Type="int" />
+          <Property Name="DepId" Type="uniqueidentifier" />
+          <Property Name="ProjId" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="exceptionlog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="errormessage" Type="text" />
+          <Property Name="source" Type="text" />
+          <Property Name="stacktrace" Type="text" />
+          <Property Name="target" Type="text" />
+          <Property Name="innerexceptionmessage" Type="text" />
+          <Property Name="userid" Type="uniqueidentifier" />
+          <Property Name="message" Type="text" />
+          <Property Name="createdon" Type="datetime" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="LoginPage">
           <Key>
             <PropertyRef Name="LoginId" />
           </Key>
-          <Property Name="LoginId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoginId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="UserName" Type="varchar" MaxLength="50" />
           <Property Name="UserPassword" Type="varchar" MaxLength="50" />
           <Property Name="IsDeleted" Type="bit" />
@@ -63,7 +77,7 @@
           <Key>
             <PropertyRef Name="LoginTimeId" />
           </Key>
-          <Property Name="LoginTimeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoginTimeId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="TimeIn" Type="time" Precision="7" />
           <Property Name="TimeOut" Type="time" Precision="7" />
           <Property Name="TotalTime" Type="time" Precision="7" />
@@ -74,7 +88,7 @@
           <Key>
             <PropertyRef Name="ProjectId" />
           </Key>
-          <Property Name="ProjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ProjectName" Type="varchar" MaxLength="50" />
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="CreatedOn" Type="datetime" />
@@ -83,26 +97,26 @@
           <Key>
             <PropertyRef Name="UserLoginDetailsId" />
           </Key>
-          <Property Name="UserLoginDetailsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserLoginDetailsId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="UserName" Type="varchar" MaxLength="50" />
           <Property Name="Password" Type="varchar" MaxLength="50" />
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="IsDeleted" Type="bit" />
           <Property Name="IsAdmin" Type="bit" />
         </EntityType>
-        <Association Name="FK__AdminSign__DepId__1FCDBCEB">
+        <Association Name="FK__AdminSign__DepId__29572725">
           <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
           <End Role="AdminSignUp" Type="Self.AdminSignUp" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Department">
-              <PropertyRef Name="DeparmentId" />
+              <PropertyRef Name="DepartmentId" />
             </Principal>
             <Dependent Role="AdminSignUp">
               <PropertyRef Name="DepId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__AdminSign__ProjI__20C1E124">
+        <Association Name="FK__AdminSign__ProjI__2A4B4B5E">
           <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
           <End Role="AdminSignUp" Type="Self.AdminSignUp" Multiplicity="*" />
           <ReferentialConstraint>
@@ -114,19 +128,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EmployeeD__DepId__1920BF5C">
+        <Association Name="FK__EmployeeD__DepId__1FCDBCEB">
           <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
           <End Role="EmployeeDetails" Type="Self.EmployeeDetails" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Department">
-              <PropertyRef Name="DeparmentId" />
+              <PropertyRef Name="DepartmentId" />
             </Principal>
             <Dependent Role="EmployeeDetails">
               <PropertyRef Name="DepId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EmployeeD__ProjI__1A14E395">
+        <Association Name="FK__EmployeeD__ProjI__20C1E124">
           <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
           <End Role="EmployeeDetails" Type="Self.EmployeeDetails" Multiplicity="*" />
           <ReferentialConstraint>
@@ -138,41 +152,41 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DailyEmployeeAttendenceModelStoreContainer">
+        <EntityContainer Name="EmployeeDetailsDBModelStoreContainer">
           <EntitySet Name="AdminSignUp" EntityType="Self.AdminSignUp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeeDetails" EntityType="Self.EmployeeDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="exceptionlog" EntityType="Self.exceptionlog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoginPage" EntityType="Self.LoginPage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoginTimes" EntityType="Self.LoginTimes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserLoginDetails" EntityType="Self.UserLoginDetails" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__AdminSign__DepId__1FCDBCEB" Association="Self.FK__AdminSign__DepId__1FCDBCEB">
+          <AssociationSet Name="FK__AdminSign__DepId__29572725" Association="Self.FK__AdminSign__DepId__29572725">
             <End Role="Department" EntitySet="Department" />
             <End Role="AdminSignUp" EntitySet="AdminSignUp" />
           </AssociationSet>
-          <AssociationSet Name="FK__AdminSign__ProjI__20C1E124" Association="Self.FK__AdminSign__ProjI__20C1E124">
+          <AssociationSet Name="FK__AdminSign__ProjI__2A4B4B5E" Association="Self.FK__AdminSign__ProjI__2A4B4B5E">
             <End Role="Project" EntitySet="Project" />
             <End Role="AdminSignUp" EntitySet="AdminSignUp" />
           </AssociationSet>
-          <AssociationSet Name="FK__EmployeeD__DepId__1920BF5C" Association="Self.FK__EmployeeD__DepId__1920BF5C">
+          <AssociationSet Name="FK__EmployeeD__DepId__1FCDBCEB" Association="Self.FK__EmployeeD__DepId__1FCDBCEB">
             <End Role="Department" EntitySet="Department" />
             <End Role="EmployeeDetails" EntitySet="EmployeeDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__EmployeeD__ProjI__1A14E395" Association="Self.FK__EmployeeD__ProjI__1A14E395">
+          <AssociationSet Name="FK__EmployeeD__ProjI__20C1E124" Association="Self.FK__EmployeeD__ProjI__20C1E124">
             <End Role="Project" EntitySet="Project" />
             <End Role="EmployeeDetails" EntitySet="EmployeeDetails" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="DailyEmployeeAttendenceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="EmployeeDetailsDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="AdminSignUp">
           <Key>
             <PropertyRef Name="AdminId" />
           </Key>
-          <Property Name="AdminId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdminId" Type="Guid" Nullable="false" />
           <Property Name="AdminName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -182,27 +196,27 @@
           <Property Name="IsAdmin" Type="Boolean" />
           <Property Name="IsDeleted" Type="Boolean" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="DepId" Type="Int32" />
-          <Property Name="ProjId" Type="Int32" />
-          <NavigationProperty Name="Department" Relationship="Self.FK__AdminSign__DepId__1FCDBCEB" FromRole="AdminSignUp" ToRole="Department" />
-          <NavigationProperty Name="Project" Relationship="Self.FK__AdminSign__ProjI__20C1E124" FromRole="AdminSignUp" ToRole="Project" />
+          <Property Name="DepId" Type="Guid" />
+          <Property Name="ProjId" Type="Guid" />
+          <NavigationProperty Name="Department" Relationship="Self.FK__AdminSign__DepId__29572725" FromRole="AdminSignUp" ToRole="Department" />
+          <NavigationProperty Name="Project" Relationship="Self.FK__AdminSign__ProjI__2A4B4B5E" FromRole="AdminSignUp" ToRole="Project" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
-            <PropertyRef Name="DeparmentId" />
+            <PropertyRef Name="DepartmentId" />
           </Key>
-          <Property Name="DeparmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentId" Type="Guid" Nullable="false" />
           <Property Name="DepartmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IsDeleted" Type="Boolean" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="AdminSignUps" Relationship="Self.FK__AdminSign__DepId__1FCDBCEB" FromRole="Department" ToRole="AdminSignUp" />
-          <NavigationProperty Name="EmployeeDetails" Relationship="Self.FK__EmployeeD__DepId__1920BF5C" FromRole="Department" ToRole="EmployeeDetails" />
+          <NavigationProperty Name="AdminSignUps" Relationship="Self.FK__AdminSign__DepId__29572725" FromRole="Department" ToRole="AdminSignUp" />
+          <NavigationProperty Name="EmployeeDetails" Relationship="Self.FK__EmployeeD__DepId__1FCDBCEB" FromRole="Department" ToRole="EmployeeDetails" />
         </EntityType>
         <EntityType Name="EmployeeDetail">
           <Key>
             <PropertyRef Name="EmployeeId" />
           </Key>
-          <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Guid" Nullable="false" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -213,16 +227,30 @@
           <Property Name="EmployeeImage" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="IsDeleted" Type="Boolean" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="DepId" Type="Int32" />
-          <Property Name="ProjId" Type="Int32" />
-          <NavigationProperty Name="Department" Relationship="Self.FK__EmployeeD__DepId__1920BF5C" FromRole="EmployeeDetails" ToRole="Department" />
-          <NavigationProperty Name="Project" Relationship="Self.FK__EmployeeD__ProjI__1A14E395" FromRole="EmployeeDetails" ToRole="Project" />
+          <Property Name="DepId" Type="Guid" />
+          <Property Name="ProjId" Type="Guid" />
+          <NavigationProperty Name="Department" Relationship="Self.FK__EmployeeD__DepId__1FCDBCEB" FromRole="EmployeeDetails" ToRole="Department" />
+          <NavigationProperty Name="Project" Relationship="Self.FK__EmployeeD__ProjI__20C1E124" FromRole="EmployeeDetails" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="exceptionlog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="errormessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="source" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="stacktrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="target" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="innerexceptionmessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="userid" Type="Guid" />
+          <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="createdon" Type="Binary" annotation:StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="LoginPage">
           <Key>
             <PropertyRef Name="LoginId" />
           </Key>
-          <Property Name="LoginId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoginId" Type="Guid" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IsDeleted" Type="Boolean" />
@@ -232,7 +260,7 @@
           <Key>
             <PropertyRef Name="LoginTimeId" />
           </Key>
-          <Property Name="LoginTimeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoginTimeId" Type="Guid" Nullable="false" />
           <Property Name="TimeIn" Type="Time" Precision="7" />
           <Property Name="TimeOut" Type="Time" Precision="7" />
           <Property Name="TotalTime" Type="Time" Precision="7" />
@@ -243,37 +271,37 @@
           <Key>
             <PropertyRef Name="ProjectId" />
           </Key>
-          <Property Name="ProjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Guid" Nullable="false" />
           <Property Name="ProjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IsDeleted" Type="Boolean" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="AdminSignUps" Relationship="Self.FK__AdminSign__ProjI__20C1E124" FromRole="Project" ToRole="AdminSignUp" />
-          <NavigationProperty Name="EmployeeDetails" Relationship="Self.FK__EmployeeD__ProjI__1A14E395" FromRole="Project" ToRole="EmployeeDetails" />
+          <NavigationProperty Name="AdminSignUps" Relationship="Self.FK__AdminSign__ProjI__2A4B4B5E" FromRole="Project" ToRole="AdminSignUp" />
+          <NavigationProperty Name="EmployeeDetails" Relationship="Self.FK__EmployeeD__ProjI__20C1E124" FromRole="Project" ToRole="EmployeeDetails" />
         </EntityType>
         <EntityType Name="UserLoginDetail">
           <Key>
             <PropertyRef Name="UserLoginDetailsId" />
           </Key>
-          <Property Name="UserLoginDetailsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserLoginDetailsId" Type="Guid" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="IsDeleted" Type="Boolean" />
           <Property Name="IsAdmin" Type="Boolean" />
         </EntityType>
-        <Association Name="FK__AdminSign__DepId__1FCDBCEB">
+        <Association Name="FK__AdminSign__DepId__29572725">
           <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
           <End Role="AdminSignUp" Type="Self.AdminSignUp" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Department">
-              <PropertyRef Name="DeparmentId" />
+              <PropertyRef Name="DepartmentId" />
             </Principal>
             <Dependent Role="AdminSignUp">
               <PropertyRef Name="DepId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__AdminSign__ProjI__20C1E124">
+        <Association Name="FK__AdminSign__ProjI__2A4B4B5E">
           <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
           <End Role="AdminSignUp" Type="Self.AdminSignUp" Multiplicity="*" />
           <ReferentialConstraint>
@@ -285,19 +313,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EmployeeD__DepId__1920BF5C">
+        <Association Name="FK__EmployeeD__DepId__1FCDBCEB">
           <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
           <End Role="EmployeeDetails" Type="Self.EmployeeDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Department">
-              <PropertyRef Name="DeparmentId" />
+              <PropertyRef Name="DepartmentId" />
             </Principal>
             <Dependent Role="EmployeeDetails">
               <PropertyRef Name="DepId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EmployeeD__ProjI__1A14E395">
+        <Association Name="FK__EmployeeD__ProjI__20C1E124">
           <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
           <End Role="EmployeeDetails" Type="Self.EmployeeDetail" Multiplicity="*" />
           <ReferentialConstraint>
@@ -309,27 +337,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="EmployeeAttendenceEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="EmployeeDetailsDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AdminSignUps" EntityType="Self.AdminSignUp" />
           <EntitySet Name="Departments" EntityType="Self.Department" />
           <EntitySet Name="EmployeeDetails" EntityType="Self.EmployeeDetail" />
+          <EntitySet Name="exceptionlogs" EntityType="Self.exceptionlog" />
           <EntitySet Name="LoginPages" EntityType="Self.LoginPage" />
           <EntitySet Name="LoginTimes" EntityType="Self.LoginTime" />
           <EntitySet Name="Projects" EntityType="Self.Project" />
           <EntitySet Name="UserLoginDetails" EntityType="Self.UserLoginDetail" />
-          <AssociationSet Name="FK__AdminSign__DepId__1FCDBCEB" Association="Self.FK__AdminSign__DepId__1FCDBCEB">
+          <AssociationSet Name="FK__AdminSign__DepId__29572725" Association="Self.FK__AdminSign__DepId__29572725">
             <End Role="Department" EntitySet="Departments" />
             <End Role="AdminSignUp" EntitySet="AdminSignUps" />
           </AssociationSet>
-          <AssociationSet Name="FK__AdminSign__ProjI__20C1E124" Association="Self.FK__AdminSign__ProjI__20C1E124">
+          <AssociationSet Name="FK__AdminSign__ProjI__2A4B4B5E" Association="Self.FK__AdminSign__ProjI__2A4B4B5E">
             <End Role="Project" EntitySet="Projects" />
             <End Role="AdminSignUp" EntitySet="AdminSignUps" />
           </AssociationSet>
-          <AssociationSet Name="FK__EmployeeD__DepId__1920BF5C" Association="Self.FK__EmployeeD__DepId__1920BF5C">
+          <AssociationSet Name="FK__EmployeeD__DepId__1FCDBCEB" Association="Self.FK__EmployeeD__DepId__1FCDBCEB">
             <End Role="Department" EntitySet="Departments" />
             <End Role="EmployeeDetails" EntitySet="EmployeeDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__EmployeeD__ProjI__1A14E395" Association="Self.FK__EmployeeD__ProjI__1A14E395">
+          <AssociationSet Name="FK__EmployeeD__ProjI__20C1E124" Association="Self.FK__EmployeeD__ProjI__20C1E124">
             <End Role="Project" EntitySet="Projects" />
             <End Role="EmployeeDetails" EntitySet="EmployeeDetails" />
           </AssociationSet>
@@ -339,9 +368,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DailyEmployeeAttendenceModelStoreContainer" CdmEntityContainer="EmployeeAttendenceEntities">
+        <EntityContainerMapping StorageEntityContainer="EmployeeDetailsDBModelStoreContainer" CdmEntityContainer="EmployeeDetailsDBEntities">
           <EntitySetMapping Name="AdminSignUps">
-            <EntityTypeMapping TypeName="DailyEmployeeAttendenceModel.AdminSignUp">
+            <EntityTypeMapping TypeName="EmployeeDetailsDBModel.AdminSignUp">
               <MappingFragment StoreEntitySet="AdminSignUp">
                 <ScalarProperty Name="AdminId" ColumnName="AdminId" />
                 <ScalarProperty Name="AdminName" ColumnName="AdminName" />
@@ -359,9 +388,9 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Departments">
-            <EntityTypeMapping TypeName="DailyEmployeeAttendenceModel.Department">
+            <EntityTypeMapping TypeName="EmployeeDetailsDBModel.Department">
               <MappingFragment StoreEntitySet="Department">
-                <ScalarProperty Name="DeparmentId" ColumnName="DeparmentId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
                 <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
@@ -369,7 +398,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EmployeeDetails">
-            <EntityTypeMapping TypeName="DailyEmployeeAttendenceModel.EmployeeDetail">
+            <EntityTypeMapping TypeName="EmployeeDetailsDBModel.EmployeeDetail">
               <MappingFragment StoreEntitySet="EmployeeDetails">
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -387,8 +416,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="exceptionlogs">
+            <EntityTypeMapping TypeName="EmployeeDetailsDBModel.exceptionlog">
+              <MappingFragment StoreEntitySet="exceptionlog">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="errormessage" ColumnName="errormessage" />
+                <ScalarProperty Name="source" ColumnName="source" />
+                <ScalarProperty Name="stacktrace" ColumnName="stacktrace" />
+                <ScalarProperty Name="target" ColumnName="target" />
+                <ScalarProperty Name="innerexceptionmessage" ColumnName="innerexceptionmessage" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="createdon" ColumnName="createdon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="LoginPages">
-            <EntityTypeMapping TypeName="DailyEmployeeAttendenceModel.LoginPage">
+            <EntityTypeMapping TypeName="EmployeeDetailsDBModel.LoginPage">
               <MappingFragment StoreEntitySet="LoginPage">
                 <ScalarProperty Name="LoginId" ColumnName="LoginId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -399,7 +443,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LoginTimes">
-            <EntityTypeMapping TypeName="DailyEmployeeAttendenceModel.LoginTime">
+            <EntityTypeMapping TypeName="EmployeeDetailsDBModel.LoginTime">
               <MappingFragment StoreEntitySet="LoginTimes">
                 <ScalarProperty Name="LoginTimeId" ColumnName="LoginTimeId" />
                 <ScalarProperty Name="TimeIn" ColumnName="TimeIn" />
@@ -411,7 +455,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Projects">
-            <EntityTypeMapping TypeName="DailyEmployeeAttendenceModel.Project">
+            <EntityTypeMapping TypeName="EmployeeDetailsDBModel.Project">
               <MappingFragment StoreEntitySet="Project">
                 <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
                 <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
@@ -421,7 +465,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserLoginDetails">
-            <EntityTypeMapping TypeName="DailyEmployeeAttendenceModel.UserLoginDetail">
+            <EntityTypeMapping TypeName="EmployeeDetailsDBModel.UserLoginDetail">
               <MappingFragment StoreEntitySet="UserLoginDetails">
                 <ScalarProperty Name="UserLoginDetailsId" ColumnName="UserLoginDetailsId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />

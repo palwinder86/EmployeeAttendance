@@ -14,7 +14,7 @@ namespace EmployeeAttendance.DAL.Data
     
     public partial class LoginPage
     {
-        public int LoginId { get; set; }
+        public System.Guid LoginId { get; set; }
         public string UserName { get; set; }
         public string UserPassword { get; set; }
         public Nullable<bool> IsDeleted { get; set; }

@@ -8,7 +8,7 @@ namespace EmployeeAttendance.BAL.Models
 {
     public class LogInVM
     { //LogInPage
-        public int LoginId { get; set; }
+        public Guid LoginId { get; set; }
         public string UserName { get; set; }
         public string UserPassword { get; set; }
         public Nullable<bool> IsDeleted { get; set; }

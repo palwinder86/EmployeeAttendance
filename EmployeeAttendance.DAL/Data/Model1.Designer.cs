@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'F:\EmployeeAttendance\EmployeeAttendance.DAL\Data\ApplicationDbContext.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\BID3\Documents\GitHub\EmployeeAttendance\EmployeeAttendance.DAL\Data\Model1.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

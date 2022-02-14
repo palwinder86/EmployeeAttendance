@@ -13,10 +13,10 @@ namespace EmployeeAttendance.DAL.Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class EmployeeAttendenceEntities : DbContext
+    public partial class EmployeeDetailsDBEntities : DbContext
     {
-        public EmployeeAttendenceEntities()
-            : base("name=EmployeeAttendenceEntities")
+        public EmployeeDetailsDBEntities()
+            : base("name=EmployeeDetailsDBEntities")
         {
         }
     
@@ -28,6 +28,7 @@ namespace EmployeeAttendance.DAL.Data
         public virtual DbSet<AdminSignUp> AdminSignUps { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<EmployeeDetail> EmployeeDetails { get; set; }
+        public virtual DbSet<exceptionlog> exceptionlogs { get; set; }
         public virtual DbSet<LoginPage> LoginPages { get; set; }
         public virtual DbSet<LoginTime> LoginTimes { get; set; }
         public virtual DbSet<Project> Projects { get; set; }

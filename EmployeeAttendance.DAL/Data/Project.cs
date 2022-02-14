@@ -21,7 +21,7 @@ namespace EmployeeAttendance.DAL.Data
             this.EmployeeDetails = new HashSet<EmployeeDetail>();
         }
     
-        public int ProjectId { get; set; }
+        public System.Guid ProjectId { get; set; }
         public string ProjectName { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }

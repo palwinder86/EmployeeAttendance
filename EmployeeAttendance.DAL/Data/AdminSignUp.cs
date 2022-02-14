@@ -14,7 +14,7 @@ namespace EmployeeAttendance.DAL.Data
     
     public partial class AdminSignUp
     {
-        public int AdminId { get; set; }
+        public System.Guid AdminId { get; set; }
         public string AdminName { get; set; }
         public string Address { get; set; }
         public string Email { get; set; }
@@ -24,8 +24,8 @@ namespace EmployeeAttendance.DAL.Data
         public Nullable<bool> IsAdmin { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
-        public Nullable<int> DepId { get; set; }
-        public Nullable<int> ProjId { get; set; }
+        public Nullable<System.Guid> DepId { get; set; }
+        public Nullable<System.Guid> ProjId { get; set; }
     
         public virtual Department Department { get; set; }
         public virtual Project Project { get; set; }

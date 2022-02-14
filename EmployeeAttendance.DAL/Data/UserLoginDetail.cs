@@ -14,12 +14,11 @@ namespace EmployeeAttendance.DAL.Data
     
     public partial class UserLoginDetail
     {
-        public int UserLoginDetailsId { get; set; }
+        public System.Guid UserLoginDetailsId { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<bool> IsAdmin { get; set; }
-
     }
 }

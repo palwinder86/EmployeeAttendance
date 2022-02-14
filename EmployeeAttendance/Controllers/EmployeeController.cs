@@ -15,11 +15,11 @@ namespace EmployeeAttendance.Controllers
     {
         // GET: Employee
         private readonly RegistrationService _service;
-        EmployeeAttendenceEntities _context;
+        EmployeeDetailsDBEntities _context;
         public EmployeeController()
         {
             _service = new RegistrationService();
-            _context = new EmployeeAttendenceEntities();
+            _context = new EmployeeDetailsDBEntities();
         }
         public ActionResult Index()
         {
@@ -78,7 +78,7 @@ namespace EmployeeAttendance.Controllers
             return View(data);
         }
 
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(Guid? id)
         {
             if (id == null)
                 return View();
@@ -131,7 +131,7 @@ namespace EmployeeAttendance.Controllers
             return View();
 
         }
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
            bool data= _service.DeleteData(id);
             return RedirectToAction(nameof(Display));
@@ -143,7 +143,7 @@ namespace EmployeeAttendance.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Details(int? id)
+        public ActionResult Details(Guid? id)
         {
             var EmpoyeeDetail = _service.Detail(id);
             return View(EmpoyeeDetail);
