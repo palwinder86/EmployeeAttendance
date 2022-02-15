@@ -22,6 +22,6 @@ namespace EmployeeAttendance.DAL.Data
         public string innerexceptionmessage { get; set; }
         public Nullable<System.Guid> userid { get; set; }
         public string message { get; set; }
-        public DateTime createdon { get; set; }
+        public Nullable<System.DateTime> createdon { get; set; }
     }
 }

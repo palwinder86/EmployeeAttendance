@@ -41,32 +41,38 @@ namespace EmployeeAttendance.Controllers
         [HttpPost]
         public ActionResult Create(HttpPostedFileBase file, EmployeeVM emp)
         {
-
-            if (ModelState.IsValid)
+            try
             {
-                ViewBag.DepartmentList = _service.GetDepartmentList();
-                ViewBag.DesignationList = _service.GetProjectList();
-
-                string filename = Path.GetFileName(file.FileName);
-                string _filename = DateTime.Now.ToString("yymmssfff") + filename;
-                string extenion = Path.GetExtension(file.FileName);
-                string path = Path.Combine(Server.MapPath("~/images/"), _filename);
-                emp.EmployeeImage = "~/images/" + _filename;
-                if (extenion.ToLower() == ".jpg" || extenion.ToLower() == ".jpeg" || extenion.ToLower() == ".png")
+                if (ModelState.IsValid)
                 {
+                    ViewBag.DepartmentList = _service.GetDepartmentList();
+                    ViewBag.DesignationList = _service.GetProjectList();
 
-                    if (file.ContentLength <= 1000000)
+                    string filename = Path.GetFileName(file.FileName);
+                    string _filename = DateTime.Now.ToString("yymmssfff") + filename;
+                    string extenion = Path.GetExtension(file.FileName);
+                    string path = Path.Combine(Server.MapPath("~/images/"), _filename);
+                    emp.EmployeeImage = "~/images/" + _filename;
+                    if (extenion.ToLower() == ".jpg" || extenion.ToLower() == ".jpeg" || extenion.ToLower() == ".png")
                     {
-                        bool modal = _service.CreateEmployeeData(emp);
 
-                        file.SaveAs(path);
+                        if (file.ContentLength <= 1000000)
+                        {
+                            bool modal = _service.CreateEmployeeData(emp);
 
-                        ModelState.Clear();
-                        return RedirectToAction(nameof(Index));
+                            file.SaveAs(path);
+
+                            ModelState.Clear();
+                            return RedirectToAction(nameof(Index));
+                        }
+
                     }
 
                 }
-
+            }
+            catch(Exception ex)
+            {
+                ExceptionService.SaveException(ex);
             }
             return View();
         }
@@ -80,6 +86,7 @@ namespace EmployeeAttendance.Controllers
 
         public ActionResult Edit(Guid? id)
         {
+
             if (id == null)
                 return View();
             ViewBag.DepartmentList = _service.GetDepartmentList();
@@ -92,6 +99,8 @@ namespace EmployeeAttendance.Controllers
         [HttpPost]
         public ActionResult Edit(HttpPostedFileBase file, EmployeeVM emp)
         {
+            try 
+            { 
            // EmployeeDetail employee = new EmployeeDetail();
             if (ModelState.IsValid)
             {
@@ -122,31 +131,49 @@ namespace EmployeeAttendance.Controllers
                             }
 
                             _context.Entry(employee).State = EntityState.Modified;
-
+                         }
                              return RedirectToAction(nameof(Display));
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                ExceptionService.SaveException(ex);
             }
             return View();
 
         }
         public ActionResult Delete(Guid id)
         {
-           bool data= _service.DeleteData(id);
+            try
+            {
+
+
+                bool data = _service.DeleteData(id);
+            }
+            catch (Exception ex)
+            {
+                ExceptionService.SaveException(ex);
+            }
             return RedirectToAction(nameof(Display));
         }
 
-        public ActionResult TestMethod()
-        {
-            var a = 10;
-            return RedirectToAction("Index");
-        }
+
 
         public ActionResult Details(Guid? id)
         {
-            var EmpoyeeDetail = _service.Detail(id);
-            return View(EmpoyeeDetail);
+            try
+            {
+                var EmpoyeeDetail = _service.Detail(id);
+                return View(EmpoyeeDetail);
+            }
+            catch (Exception ex)
+            {
+                ExceptionService.SaveException(ex);
+            }
+            return View();
+            
         }
       
     }
