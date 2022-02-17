@@ -8,6 +8,8 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Net.Mail;
+using System.Net;
 
 namespace EmployeeAttendance.Controllers
 {
@@ -31,13 +33,7 @@ namespace EmployeeAttendance.Controllers
             ViewBag.ProjectList = _service.GetProjectList();
             return View();
         }
-        //[HttpPost]
-        //public ActionResult Create(EmployeeVM employeeVM)
-        //{
-        //    _service.CreateEmployeeData(employeeVM);
-        //    return RedirectToAction("Index");
-        //}
-
+    
         [HttpPost]
         public ActionResult Create(HttpPostedFileBase file, EmployeeVM emp)
         {
@@ -83,7 +79,6 @@ namespace EmployeeAttendance.Controllers
             var data = _service.FindData(Search);
             return View(data);
         }
-
         public ActionResult Edit(Guid? id)
         {
 
@@ -148,8 +143,6 @@ namespace EmployeeAttendance.Controllers
         {
             try
             {
-
-
                 bool data = _service.DeleteData(id);
             }
             catch (Exception ex)
@@ -158,9 +151,6 @@ namespace EmployeeAttendance.Controllers
             }
             return RedirectToAction(nameof(Display));
         }
-
-
-
         public ActionResult Details(Guid? id)
         {
             try
@@ -172,9 +162,35 @@ namespace EmployeeAttendance.Controllers
             {
                 ExceptionService.SaveException(ex);
             }
-            return View();
-            
+            return View();            
         }
-      
+        
+        public ActionResult SendMail()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult SendMail(EmailVM model)
+        {
+
+            using (MailMessage mm = new MailMessage(model.SenderEmail, model.EmailTo))
+            {
+                mm.Subject = model.Subject;
+                mm.Body = model.Body;
+
+                mm.IsBodyHtml = false;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.EnableSsl = true;
+                NetworkCredential NetworkCred = new NetworkCredential("singhpalwinder8624@gmail.com", "Purewal@0001");
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = NetworkCred;
+                smtp.Port = 587;
+                smtp.Send(mm);
+            }
+            return View();
+
+        }
+
     }
 }
